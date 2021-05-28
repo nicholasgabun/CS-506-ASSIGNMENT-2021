@@ -7,7 +7,7 @@
     <head>
     <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>User Register</title>
+  <title>User Login</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -30,39 +30,23 @@
             <div class="col-lg-3 col-md-2"></div>
             <div class="col-lg-6 col-md-8 login-box">
                 <div class="col-lg-12 login-key">
-                    <img src = "reg_key.jpg" width="100" height="80">
+                    <img src = "key.jpg" width="80" height="70">
                     <!-- <i class="fa fa-key" aria-hidden="true"></i> -->
                 </div>
                 <div class="col-lg-12 login-title">
-                   Register
+                   User Login
                 </div>
 
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
                         <form>
                             <div class="form-group">
-                                <label class="form-control-label">name</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <label class="form-control-label">email</label>
-                                <input type="email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">phone</label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="form-control-label">address</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">password</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">confirm password</label>
-                                <input type="text" class="form-control">
+                                <label class="form-control-label">Password</label>
+                                <input type="password" class="form-control" i>
                             </div>
 
                             <div class="col-lg-12 loginbttm">
@@ -70,7 +54,8 @@
                                     <!-- Error Message -->
                                 </div>
                                 <div class="col-lg-6 login-btm login-button">
-                                    <button type="submit" class="btn btn-outline-primary">Save</button>
+                                    <a href = "register.php" class="btn btn-outline-secondary">Register</a>
+                                    <button type="submit" class="btn btn-outline-primary">Login</button>
                                 </div>
                             </div>
                         </form>
