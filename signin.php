@@ -41,8 +41,8 @@
                     <div class="col-lg-12 login-form">
                         <form>
                             <div class="form-group">
-                                <label class="form-control-label" name ="email">email</label>
-                                <input type="text" class="form-control">
+                                <label class="form-control-label">email</label>
+                                <input type="text" class="form-control" name = "email">
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Password</label>
