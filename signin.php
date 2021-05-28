@@ -41,12 +41,12 @@
                     <div class="col-lg-12 login-form">
                         <form>
                             <div class="form-group">
-                                <label class="form-control-label">email</label>
+                                <label class="form-control-label" name ="email">email</label>
                                 <input type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Password</label>
-                                <input type="password" class="form-control" i>
+                                <input type="password" class="form-control" name="password">
                             </div>
 
                             <div class="col-lg-12 loginbttm">
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="col-lg-6 login-btm login-button">
                                     <a href = "register.php" class="btn btn-outline-secondary">Register</a>
-                                    <button type="submit" class="btn btn-outline-primary">Login</button>
+                                    <button type="submit" class="btn btn-outline-primary" name="login">Login</button>
                                 </div>
                             </div>
                         </form>
