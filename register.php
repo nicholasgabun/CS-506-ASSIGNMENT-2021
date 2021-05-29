@@ -1,8 +1,30 @@
+<?php
+session_start();
+require_once("User.php");
+
+if(isset($_POST['registerUser'])){
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $password = $_POST['password'];
+    $confirm_pass = $_POST['confirm_pass'];
+
+    if(!$password == $confirm_pass){
+        $_SESSION['error'] = "Password and confirm password fields do not match";
+    }
+    else if(!empty($name) AND !empty($email) AND !empty($phone) AND !empty($address) AND !empty($password)) {
+        
+        $user = new User();
+       $result = $user->registerUser($name,$email,$phone,$address,$password);
+       if($result==true)
+         $_SESSION["success"] = "User registered successfully <a href='signin.php' class='btn btn-primary'>Login here</a>";
+        else
+        $_SESSION['error'] = "Error registering user";
+    }
+}
+?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
     <meta charset="utf-8">
@@ -37,32 +59,59 @@
                    Register
                 </div>
 
+                <div class="row">
+                <!-- Error and success check and alert -->
+                <?php
+                if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+                ?>
+                    <div class="col-lg-2"></div>
+                    <div id="successDiv" class="col-lg-8 col-lg-offset-4 alert alert-success">
+                        <?php
+                        echo $_SESSION['success'];
+                        $_SESSION['success'] = "";
+                        ?>
+                    </div>
+                <?php
+                } elseif (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+                ?>
+                    <div class="col-lg-2"></div>
+                    <div id="errorDiv" class="col-lg-8 col-lg-offset-4 alert alert-danger">
+                        <?php
+                        echo $_SESSION['error'];
+                        $_SESSION['error'] = "";
+                        ?>
+                    </div>
+                <?php
+                }
+                ?>
+                </div>
+
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
-                        <form>
+                        <form action="" method="post">
                             <div class="form-group">
                                 <label class="form-control-label">name</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="name">
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">email</label>
-                                <input type="email" class="form-control">
+                                <input type="email" class="form-control" name="email">
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">phone</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="phone">
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">address</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="address">
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">password</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name = "password">
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">confirm password</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="confirm_pass">
                             </div>
 
                             <div class="col-lg-12 loginbttm">
@@ -70,7 +119,7 @@
                                     <!-- Error Message -->
                                 </div>
                                 <div class="col-lg-6 login-btm login-button">
-                                    <button type="submit" class="btn btn-outline-primary">Save</button>
+                                    <button type="submit" class="btn btn-outline-primary" name = "registerUser">Save</button>
                                 </div>
                             </div>
                         </form>

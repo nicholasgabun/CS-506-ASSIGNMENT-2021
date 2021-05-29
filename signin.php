@@ -1,8 +1,30 @@
+<?php
+session_start();
+
+    require_once("User.php");
+
+    if(isset($_POST['login'])){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        if(!empty($email) AND !empty($password)){
+            $user = New User();
+            $login = $user->loginUser($email,$password);
+            
+            if($login == true){
+                $_SESSION['success'] = "Welcome ". $_SESSION['username'];
+            }
+            else{
+                $_SESSION["error"] = "Invalid login credentials";
+            }
+        }
+        else{
+            $_SESSION["error"] = "Please ensure you enter a valid email and password";
+        }
+    }
+?>
+
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
     <meta charset="utf-8">
@@ -36,10 +58,36 @@
                 <div class="col-lg-12 login-title">
                    User Login
                 </div>
+                <!-- Error and success check and alert -->
+                <div class="row">
+                <?php
+                if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+                ?>
+                    <div class="col-lg-2"></div>
+                    <div id="successDiv" class="col-lg-8 col-lg-offset-6 alert alert-success">
+                        <?php
+                        echo $_SESSION['success'];
+                        $_SESSION['success'] = "";
+                        ?>
+                    </div>
+                <?php
+                } elseif (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+                ?>
+                    <div class="col-lg-2"></div>
+                    <div id="errorDiv" class="col-lg-8 col-lg-offset-4 alert alert-danger">
+                        <?php
+                        echo $_SESSION['error'];
+                        $_SESSION['error'] = "";
+                        ?>
+                    </div>
+                <?php
+                }
+                ?>
+                </div>
 
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
-                        <form>
+                        <form action="" method="post">
                             <div class="form-group">
                                 <label class="form-control-label">email</label>
                                 <input type="text" class="form-control" name = "email">
