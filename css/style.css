@@ -597,6 +597,11 @@ button {
     border-radius: 15px;
 }
 
+.white-label {
+    color: #fff;
+    font-size: 18px;
+}
+
 .request .main_form .textarea {
     border: inherit;
     padding: 0px 19px;

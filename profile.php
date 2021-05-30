@@ -1,4 +1,24 @@
-<?php session_start();?>
+<?php 
+session_start();
+require_once("functions.php");
+if(!isset($_SESSION['user_id'])){
+    redirect("index.html");
+}
+else{
+    require_once("User.php");
+    $user_id = $_SESSION['user_id'];
+    $userObj = new User();
+    $user = $userObj->getUserById($user_id);
+    foreach($user as $theUser){
+        $name = $theUser['name'];
+        $phone = $theUser['phone'];
+        $address = $theUser['address'];
+        $email = $theUser['email'];
+        // $photo = $thUser['photo']
+    }
+}
+
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -76,6 +96,7 @@
                                         </li>
                                     </ul>
                                     <div class="sign_btn"><a href="signin.php">Sign in</a></div>
+                                    <div class="sign_btn"><a href="logout.php">Logout</a></div>
                                     <?php if(isset($_SESSION['user_id'])){ ?>
                                     <div class="sign_btn"><a href="profile.php">My Profile</a></div>
                                     <?php
@@ -86,31 +107,65 @@
                     </div>
                 </div>
             </div>
-            <!-- end header inner -->
-            <!-- end header -->
-            <!-- banner -->
-            <section class="banner_main">
-                <div class="container-fluid">
-                    <div class="row d_flex">
-                        <div class="col-md-5">
-                            <div class="text-bg">
-                                <h1>Computer and <br>laptop shop</h1>
-                                <strong>Welcome to your one stop shop for</strong>
-                                <span>Computers and computer accessories</span>
-                                <a href="#">Buy Now</a>
-                            </div>
-                        </div>
-                        <div class="col-md-7 padding_right1">
-                            <div class="text-img">
-                                <figure><img src="images/top_img.png" alt="#" /></figure>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     </header>
-    <!-- end banner -->
+    <!-- profile -->
+    <div class="request">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12" style = "margin-top: 20px">
+                  <div class="titlepage">
+                     <h2>Profile of <?php echo $name; ?></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="black_bg">
+                     <div class="row">
+                        <div class="col-md-7 ">
+                           <form class="main_form">
+                              <div class="row">
+                                 <div class="col-md-12 ">
+                                 <label class = "white-label">Name:</label>
+                                    <input class="contactus" placeholder="Name" type="text" name="name" value="<?php echo $name;?>">
+                                 </div>
+                                 <div class="col-md-12">
+                                 <label class = "white-label">Phone Number:</label>
+                                    <input class="contactus" placeholder="Phone number" type="text" name="phone" value="<?php echo $phone;?>" >
+                                 </div>
+                                 <div class="col-md-12">
+                                 <label class = "white-label">Email:</label>
+                                    <input class="contactus" placeholder="Email" type="email" name="email" value="<?php echo $email;?>">
+                                 </div>
+                                 <div class="col-md-12">
+                                 <label class = "white-label">Address:</label>
+                                 <input class="contactus" placeholder="Address" type="text" name="address" value="<?php echo $address;?>">
+                                 </div>
+                                 <div class=" row col-md-12">
+                                 <div class="col-md-6">
+                                    <button class="send_btn">Upload Image</button>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <button class="send_btn">Update Profile</button>
+                                 </div>
+                                 </div>
+                                 
+                              </div>
+                           </form>
+                        </div>
+                        <div class="col-md-5">
+                           <div class="mane_img">
+                              <figure><img src="images/top_img.png" alt="Profile pic"/></figure>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end profile -->
     <!-- about -->
     <div id="about" class="about">
         <div class="container">
