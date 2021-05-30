@@ -2,6 +2,7 @@
 session_start();
 
     require_once("User.php");
+    require_once("functions.php");
 
     if(isset($_POST['login'])){
         $email = $_POST['email'];
@@ -13,6 +14,7 @@ session_start();
             
             if($login == true){
                 $_SESSION['success'] = "Welcome ". $_SESSION['username'];
+                redirect("profile.php");
             }
             else{
                 $_SESSION["error"] = "Invalid login credentials";
