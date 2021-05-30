@@ -17,6 +17,21 @@ else{
         // $photo = $thUser['photo']
     }
 }
+if(isset($_POST["updateProfile"])){
+    $user_id = $_SESSION['user_id'];
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $email = $_POST['email'];
+    $userObj = new User();
+    $updated = $userObj->updateUser($user_id,$name,$email,$phone,$address);
+    if($updated){
+        $_SESSION['success'] = "User Updated Successfully";
+    }
+    // else{
+    //     $_SESSION['error'] = "Unable to update the user";
+    // }
+}
 
 ?>
 <!DOCTYPE html>
@@ -119,35 +134,59 @@ else{
                   </div>
                </div>
             </div>
+            <!-- Error and success check and alert -->
+            <div class="row">
+                <?php
+                if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+                ?>
+                    <div class="col-lg-2"></div>
+                    <div id="successDiv" class="col-lg-8 col-lg-offset-6 alert alert-success">
+                        <?php
+                        echo $_SESSION['success'];
+                        $_SESSION['success'] = "";
+                        ?>
+                    </div>
+                <?php
+                } elseif (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+                ?>
+                    <div class="col-lg-2"></div>
+                    <div id="errorDiv" class="col-lg-8 col-lg-offset-4 alert alert-danger">
+                        <?php
+                        echo $_SESSION['error'];
+                        $_SESSION['error'] = "";
+                        ?>
+                    </div>
+                <?php
+                }
+                ?>
+                </div>
             <div class="row">
                <div class="col-sm-12">
                   <div class="black_bg">
                      <div class="row">
                         <div class="col-md-7 ">
-                           <form class="main_form">
+                           <form class="main_form" action = "" method="post">
                               <div class="row">
                                  <div class="col-md-12 ">
                                  <label class = "white-label">Name:</label>
-                                    <input class="contactus" placeholder="Name" type="text" name="name" value="<?php echo $name;?>">
+                                    <input class="contactus" name="name" type="text" name="name" value="<?php echo $name;?>">
                                  </div>
                                  <div class="col-md-12">
                                  <label class = "white-label">Phone Number:</label>
-                                    <input class="contactus" placeholder="Phone number" type="text" name="phone" value="<?php echo $phone;?>" >
+                                    <input class="contactus" name="phone" type="text" name="phone" value="<?php echo $phone;?>" >
                                  </div>
                                  <div class="col-md-12">
                                  <label class = "white-label">Email:</label>
-                                    <input class="contactus" placeholder="Email" type="email" name="email" value="<?php echo $email;?>">
+                                    <input class="contactus" name="email" type="email" name="email" value="<?php echo $email;?>">
                                  </div>
                                  <div class="col-md-12">
                                  <label class = "white-label">Address:</label>
-                                 <input class="contactus" placeholder="Address" type="text" name="address" value="<?php echo $address;?>">
+                                 <input class="contactus" name="address" type="text" name="address" value="<?php echo $address;?>">
                                  </div>
                                  <div class=" row col-md-12">
+                                 
                                  <div class="col-md-6">
-                                    <button class="send_btn">Upload Image</button>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <button class="send_btn">Update Profile</button>
+                                    <button class="send_btn" name = "updateProfile">Update Profile</button>
                                  </div>
                                  </div>
                                  
