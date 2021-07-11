@@ -110,7 +110,7 @@ if(isset($_POST["updateProfile"])){
                                             <a class="nav-link top_btns" href="#contact">Contact us</a>
                                         </li>
                                     </ul>
-                                    <div class="sign_btn"><a href="signin.php">Sign in</a></div>
+                                    <div class="sign_btn"><a href="posts.php">Posts</a></div>
                                     <div class="sign_btn"><a href="logout.php">Logout</a></div>
                                     <?php if(isset($_SESSION['user_id'])){ ?>
                                     <div class="sign_btn"><a href="profile.php">My Profile</a></div>
