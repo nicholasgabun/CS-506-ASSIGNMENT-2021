@@ -17,19 +17,17 @@ else{
         $photo = $theUser['photo'];
     }
 }
-if(isset($_POST["updateProfile"])){
+if(isset($_POST["updatePhoto"])){
     $user_id = $_SESSION['user_id'];
-    $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
-    $email = $_POST['email'];
+    $photo = $_FILES['photo'];
+
     $userObj = new User();
-    $updated = $userObj->updateUser($user_id,$name,$email,$phone,$address);
+    $updated = $userObj->save_photo($user_id,$photo);
     if($updated){
-        $_SESSION['success'] = "User Updated Successfully";
+        $_SESSION['success'] = "User Photo Updated Successfully";
     }
     else{
-        $_SESSION['error'] = "Unable to update the user";
+        $_SESSION['error'] = "Unable to update the user photo";
     }
 }
 
@@ -110,7 +108,6 @@ if(isset($_POST["updateProfile"])){
                                             <a class="nav-link top_btns" href="#contact">Contact us</a>
                                         </li>
                                     </ul>
-                                    <div class="sign_btn"><a href="signin.php">Sign in</a></div>
                                     <div class="sign_btn"><a href="logout.php">Logout</a></div>
                                     <?php if(isset($_SESSION['user_id'])){ ?>
                                     <div class="sign_btn"><a href="profile.php">My Profile</a></div>
@@ -165,30 +162,16 @@ if(isset($_POST["updateProfile"])){
                   <div class="black_bg">
                      <div class="row">
                         <div class="col-md-7 ">
-                           <form class="main_form" action = "" method="post">
+                           <form class="main_form" action = "" method="post" enctype="multipart/form-data">
                               <div class="row">
-                                 <div class="col-md-12 ">
-                                 <label class = "white-label">Name:</label>
-                                    <input class="contactus" name="name" type="text" name="name" value="<?php echo $name;?>">
-                                 </div>
                                  <div class="col-md-12">
-                                 <label class = "white-label">Phone Number:</label>
-                                    <input class="contactus" name="phone" type="text" name="phone" value="<?php echo $phone;?>" >
-                                 </div>
-                                 <div class="col-md-12">
-                                 <label class = "white-label">Email:</label>
-                                    <input class="contactus" name="email" type="email" name="email" value="<?php echo $email;?>">
-                                 </div>
-                                 <div class="col-md-12">
-                                 <label class = "white-label">Address:</label>
-                                 <input class="contactus" name="address" type="text" name="address" value="<?php echo $address;?>">
+                                 <label class = "white-label">Upload Image:</label>
+                                 <input class="form-control" name="photo" type="file" name="photo">
                                  </div>
                                  <div class=" row col-md-12">
+                                 
                                  <div class="col-md-6">
-                                    <a class="send_btn" href = "image_upload.php">Update Image</a>
-                                 </div>                                 
-                                 <div class="col-md-6">
-                                    <button class="send_btn" name = "updateProfile">Update Profile</button>
+                                    <button class="send_btn" name = "updatePhoto">Update Photo</button>
                                  </div>
                                  </div>
                                  
@@ -197,17 +180,7 @@ if(isset($_POST["updateProfile"])){
                         </div>
                         <div class="col-md-5">
                            <div class="mane_img">
-                           <?php
-                            if(!empty($photo)){
-                            ?>
-                            
-                            <img src="<?php echo $photo;?>" alt="Profile pic"/>
-                            <?php
-                            }
-                            else{
-                           ?>
                               <figure><img src="images/top_img.png" alt="Profile pic"/></figure>
-                              <?php } ?>
                            </div>
                         </div>
                      </div>

@@ -110,5 +110,57 @@ require_once("DB.php");
   }
   return $flag;
 }
+
+function save_photo($user_id,$photo){
+   $photo_name = uniqid();
+ 
+    $updated = false;
+    try {
+        $path = "uploads/profile_pics";
+        $ext_type = array('jpg', 'jpe', 'jpeg', 'png', 'bmp');
+        $ext = strtolower(pathinfo($photo["name"], PATHINFO_EXTENSION));
+        if (in_array($ext, $ext_type)) {
+            $user_photo =  basename($photo_name . "." . $ext);
+           // create the file part if not exit
+            if (!is_dir($path) && !mkdir($path, 0755, true)) {
+                die("Error creating folder $path");
+            }
+            if (move_uploaded_file($_FILES['photo']['tmp_name'], "$path/$user_photo")) {
+                // Move succeed.
+                $photo_url = $path . "/" . $user_photo; //Path to be saved to DB
+                $updated = $this->updateProfilePic($user_id,$photo_url);
+            }
+        }
+    } catch (Exception $e) {
+        $_SESSION["error"] =  $e->getMessage();
+        return $updated;
+    }
+    return $updated;
+}
+
+function updateProfilePic($userId,$photo_url){
+    $this->connection = new Connection();
+    $con = $this->connection->doConnection();
+  $query =  "UPDATE users SET photo = :photo_url where id = :id";
+    $flag = false;
+  try{
+    $stmt = $con->prepare($query);
+
+    $stmt->bindValue(":id", $userId);
+    $stmt->bindValue(":photo_url", $photo_url);
+    
+    $updated = $stmt->execute();
+
+    if($updated){
+      $flag = true;
+    }
+
+  }
+  catch(Exception $ex){
+    $_SESSION['error'] = $ex->getMessage();
+    return $flag;
+  }
+  return $flag;
  }
+}
 ?>
