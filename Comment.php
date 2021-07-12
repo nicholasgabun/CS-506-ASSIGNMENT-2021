@@ -25,15 +25,15 @@
     }
 
     //Get Comment by id
-    function getCommentbybId($id){
+    function getPostComments($post_id){
         $this->connection = new Connection();
         $con = $this->connection->doConnection();
-        $query =  "SELECT * FROM comments where comment_id = :id";
+        $query =  "SELECT c.*, u.name, u.photo FROM comments c inner join users u on c.user_id = u.id where c.post_id = :id";
 
         try{
             $stmt = $con->prepare($query);
 
-            $stmt->bindValue(":id", $id);
+            $stmt->bindValue(":id", $post_id);
             
             $stmt->execute();
             $user = $stmt->fetchAll();

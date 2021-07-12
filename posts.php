@@ -9,6 +9,7 @@ else{
     require_once("includes/header.php");
     require_once("Post.php");
     require_once("User.php");
+    require_once("Comment.php");
     $post_obj = new Post();
     $posts = $post_obj->getAllPosts();
     // var_dump($posts);
@@ -74,13 +75,16 @@ else{
         <div class="col-md-8">
             <h2>Users Posts</h2>
             <?php
-                foreach($posts as $post){
-                    $post_id = $post['post_id'];
-                    $post_message = $post['post_message'];
-                    $posted_on = $post['posted_on'];
-                    $user_id = $post['user_id'];
-                    $username = $post['name'];
-                    $user_photo = $post['photo'];
+            $comment_obj = new Comment();
+            foreach($posts as $post){
+                $post_id = $post['post_id'];
+                $post_message = $post['post_message'];
+                $posted_on = $post['posted_on'];
+                $user_id = $post['user_id'];
+                $username = $post['name'];
+                $user_photo = $post['photo'];
+
+                $comments = $comment_obj->getPostComments($post_id);
             ?>
             <div class="row">
                 <div class="col-md-2">
@@ -95,6 +99,34 @@ else{
                 <div class="col-md-2"></div>
             <p><?php echo $post_message; ?></p>
             </div>
+            <!-- Comments Section -->
+            <h2>Comments</h2>
+            <div class="row mt-20">
+                <?php
+                    if($comments ==  0){
+                        echo "There are no comments for this post yet";
+                    }
+                    else{
+                       foreach($comments as $user_comment){
+                           $comment_body = $user_comment['comment_body'];
+                           $comment_date = $user_comment['commented_on'];
+                           $commenter = $user_comment['name'];
+                           $commenter_photo = $user_comment['photo'];
+                           ?>
+                           <div class="col-md-1"></div>
+                           <div class="col-md-1">
+                               <img class = "img-responsive" src="<?php echo $commenter_photo?>"/>
+                           </div>
+                           <div class="col-md-8">
+                               <strong><?php echo $commenter;?> </strong> <span style = "margin-left: 60%;"><?php echo  date("F j, g:i a", strtotime($comment_date));?></span>
+                               <p style = "margin-left: -10px;"><?php echo $comment_body;?></p>
+                           </div>
+
+                           <?php
+                       }
+                    }
+                ?>
+            </div>
             <div class="row mt-20">
                 <?php
                 $user_obj = new User();
@@ -102,8 +134,8 @@ else{
                 foreach($current_user as $logged_in_user){
                     $this_user_photo = $logged_in_user['photo'];
                 ?>
-                <div class="col-md-2">
-                    <img src = "<?php echo $this_user_photo; ?>" class="thumbnail_images"/>
+                <div class="col-md-1">
+                    <img src = "<?php echo $this_user_photo; ?>" class=" thumbnail_images img-responsive"/>
                 </div>
                 <div class="col-md-8">
                 <form action="comment_handler.php" method="post">
