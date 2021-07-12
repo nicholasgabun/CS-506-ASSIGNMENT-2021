@@ -92,7 +92,7 @@ else{
                 </div>
                 <div class="col-md-4">
                 <h3> <?php echo $username;?></h3>
-                <p> <?php echo date("F j, Y, g:i a",strtotime($posted_on));?> </p>
+                    <p> <?php echo date("F j, Y, g:i a",strtotime($posted_on));?> </p>
                 </div>
             </div>
             <div class="row">
