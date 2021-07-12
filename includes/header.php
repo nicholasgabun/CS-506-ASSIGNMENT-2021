@@ -1,4 +1,3 @@
-<?php session_start();?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -36,9 +35,9 @@
 
 <body class="main-layout">
     <!-- loader  -->
-    <div class="loader_bg">
+    <!-- <div class="loader_bg">
         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
-    </div>
+    </div> -->
     <!-- end loader -->
     <!-- header -->
     <header>
@@ -75,97 +74,18 @@
                                             <a class="nav-link top_btns" href="#contact">Contact us</a>
                                         </li>
                                     </ul>
-                                    <div class="sign_btn"><a href="signin.php">Sign in</a></div>
                                     <?php if(isset($_SESSION['user_id'])){ ?>
                                     <div class="sign_btn"><a href="profile.php">My Profile</a></div>
                                     <?php
                                     }?>
+                                    <div class="sign_btn"><a href="posts.php">Posts</a></div>
+                                    <div class="sign_btn"><a href="logout.php">Logout</a></div>
+                                    
                                 </div>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- end header inner -->
-            <!-- end header -->
-            <!-- banner -->
-            <section class="banner_main">
-                <div class="container-fluid">
-                    <div class="row d_flex">
-                        <div class="col-md-5">
-                            <div class="text-bg">
-                                <h1>Computer and <br>laptop shop</h1>
-                                <strong>Welcome to your one-stop shop for</strong>
-                                <span>Computers and computer accessories</span>
-                                <a href="#">Buy Now</a>
-                            </div>
-                        </div>
-                        <div class="col-md-7 padding_right1">
-                            <div class="text-img">
-                                <figure><img src="images/top_img.png" alt="#" /></figure>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     </header>
-    <!-- end banner -->
-    <!-- about -->
-    <div id="about" class="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2>About Us</h2>
-                        <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur culpa officiis possimus adipisci numquam corporis obcaecati, corrupti recusandae eligendi ipsam eum pariatur unde aliquid a amet asperiores facere ea deserunt.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- about -->
-    <!--  footer -->
-    <footer>
-        <div class="footer">
-            <div class="container" id="contact">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="cont">
-                            <h3> <strong class="multi"> Contact Us</strong><br> @Modibbo Adama University (MAUTECH) Yola.
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="cont_call">
-                            <h3> <strong class="multi"> Call Now</strong><br> (+234) XXXXXXXXX
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p>© 2021 All Rights Reserved.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- end footer -->
-    <!-- Javascript files-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/plugin.js"></script>
-    <!-- sidebar -->
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-</body>
-
-</html>
