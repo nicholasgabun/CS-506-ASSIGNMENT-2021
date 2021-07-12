@@ -27,7 +27,33 @@ else{
             </div>
         </div>
     </div>
+    <!-- Error and success check and alert -->
     <div class="row">
+                <?php
+                if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+                ?>
+                    <div class="col-lg-2"></div>
+                    <div id="successDiv" class="col-lg-8 col-lg-offset-6 alert alert-success">
+                        <?php
+                        echo $_SESSION['success'];
+                        $_SESSION['success'] = "";
+                        ?>
+                    </div>
+                <?php
+                } elseif (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+                ?>
+                    <div class="col-lg-2"></div>
+                    <div id="errorDiv" class="col-lg-8 col-lg-offset-4 alert alert-danger">
+                        <?php
+                        echo $_SESSION['error'];
+                        $_SESSION['error'] = "";
+                        ?>
+                    </div>
+                <?php
+                }
+                ?>
+                </div>
+    <div class="row mt-20">
         <div class="col-md-3"></div>
         <div class="col-md-6 jumbotron">
             <h2>Make post</h2>
@@ -82,6 +108,7 @@ else{
                 <div class="col-md-8">
                 <form action="comment_handler.php" method="post">
                     <div class="form-group">
+                        <input type="hidden" name = "post_id" value="<?php echo $post_id;?>">
                         <input type="text" class="form-control" name = "comment_message" placeholder="Add your comment...">
                     </div>
                     <div class="form-group">
